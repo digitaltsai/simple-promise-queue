@@ -25,6 +25,25 @@ var Queue = require('simple-promise-queue');
 
 Queue.setPromise(require('bluebird'));
 ```
+
+Pushing a task to the queue and getting a promise:
+```js
+var Queue = require('simple-promise-queue');
+
+var queue = new Queue({
+  autoStart: true, // autostart the queue
+});
+
+var promise = queue.pushTask(function(resolve, reject) {
+  // do some task here to fetch results
+  resolve('results');
+})
+
+promise.then(function(results) {
+  // process the results here
+});
+```
+
 A useful example of this would be if you had `Promise.all` but wanted to only throttle
 it to run 5 tasks at a time:
 
