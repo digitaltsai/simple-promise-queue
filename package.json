@@ -1,0 +1,34 @@
+{
+  "name": "simple-promise-queue",
+  "version": "0.1.0",
+  "description": "queue where you can push promise-like functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitaltsai/simple-promise-queue.git"
+  },
+  "keywords": [
+    "simple",
+    "promise",
+    "queue",
+    "async",
+    "asynchronous",
+    "synchronous",
+    "job",
+    "task",
+    "concurrency",
+    "concurrent"
+  ],
+  "author": "digitaltsai",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/digitaltsai/simple-promise-queue/issues"
+  },
+  "homepage": "https://github.com/digitaltsai/simple-promise-queue#readme",
+  "dependencies": {
+    "queue": "^3.1.0"
+  }
+}
