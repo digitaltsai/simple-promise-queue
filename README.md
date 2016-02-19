@@ -1,6 +1,9 @@
 This is a simple queue where you can push a `function(resolve, reject)` to a queue and
 get a promise that references that task.
 
+## Install
+`npm install simple-promise-queue`
+
 ## Use Cases
 * Use case #1: Throttled `Promise.all`
 * Use case #2: Used as a task queuer to grab a resource with limited connection pools
@@ -18,12 +21,16 @@ will automatically start whenever something is pushed into it.
 
 Adding your own Promise implementation:
 ```js
+var Queue = require('simple-promise-queue');
+
 Queue.setPromise(require('bluebird'));
 ```
 A useful example of this would be if you had `Promise.all` but wanted to only throttle
 it to run 5 tasks at a time:
 
 ```js
+var Queue = require('simple-promise-queue');
+
 var queue = new Queue({
   autoStart: true, // autostart the queue
   concurrency: 5
@@ -54,6 +61,8 @@ Promise.all(promiseArr).then(function() {
 Here is an example where you have 2 jobs (each having 2 tasks) to complete and
 want to know when each job is finished individually.
 ```js
+var Queue = require('simple-promise-queue');
+
 var queue = new Queue({
   autoStart: true, // autostart the queue
   concurrency: 3
