@@ -46,8 +46,10 @@ util.inherits(Queue, SuperQueue);
 
 Queue.prototype.pushTask = function(promiseFunction) {
   var self = this;
+  // this promise will not be resolved till the delayed
+  // promise is resolved/rejected
   return new QueuePromise(function(resolve, reject) {
-    // this function will do the right promise
+    // this function will create the promise when its time to
     var wrapperFunction = function(done) {
       new QueuePromise(promiseFunction).then(function(value) {
         done();
