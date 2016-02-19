@@ -10,7 +10,7 @@ get a promise that references that task.
 
 ## How to use
 
-`Queue.addTask(function(resolve, reject) { ... })` Returns a Promise.
+`Queue.pushTask(function(resolve, reject) { ... })` Returns a Promise.
 
 `simple-promise-queue` inherits from [queue](https://github.com/jessetane/queue), so check that out for other methods.
 
@@ -39,7 +39,7 @@ var queue = new Queue({
 var promiseArr = [];
 
 var updateUserInDb = function(id) {
-  var promise = queue.addTask(function(resolve, reject) {
+  var promise = queue.pushTask(function(resolve, reject) {
     // do a query to update the user here and
     resolve('done');
   });
