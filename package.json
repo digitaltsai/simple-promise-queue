@@ -1,6 +1,6 @@
 {
   "name": "simple-promise-queue",
-  "version": "0.1.0c",
+  "version": "0.1.2",
   "description": "queue where you can push promise-like functions",
   "main": "index.js",
   "scripts": {

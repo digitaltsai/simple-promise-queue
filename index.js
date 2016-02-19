@@ -51,14 +51,14 @@ Queue.prototype.pushTask = function(promiseFunction) {
     var wrapperFunction = function(done) {
       new QueuePromise(promiseFunction).then(function(value) {
         setImmediate(function() {
-          resolve(value);
+          done();
         });
-        done();
+        return resolve(value);
       }, function(reason) {
         setImmediate(function() {
-          reject(reason);
+          done();
         });
-        done();
+        return reject(reason);
       }).then(resolve, reject);
     };
 
