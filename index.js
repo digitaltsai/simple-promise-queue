@@ -67,28 +67,3 @@ Queue.prototype.pushTask = function(promiseFunction) {
 };
 
 module.exports = Queue;
-
-var queue = new Queue({
-  autoStart: true,
-  concurrency: 1
-});
-
-var job1Part1 = queue.pushTask(function(resolve, reject) {
-  // some limited resource async task that takes 5 seconds
-  setTimeout(function() {
-    console.log('done with promise');
-    resolve('promise 1 done');
-  }, 1000)
-}).then(function() {
-  console.log('test then');
-});;
-
-var job2 = queue.push(function(done) {
-  console.log('test2');
-  done();
-});
-
-var job3 = queue.push(function(done) {
-  console.log('test3');
-  done();
-});
