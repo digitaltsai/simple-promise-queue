@@ -50,15 +50,11 @@ Queue.prototype.pushTask = function(promiseFunction) {
     // this function will do the right promise
     var wrapperFunction = function(done) {
       new QueuePromise(promiseFunction).then(function(value) {
-        setImmediate(function() {
-          done();
-        });
-        return resolve(value);
+        done();
+        return value;
       }, function(reason) {
-        setImmediate(function() {
-          done();
-        });
-        return reject(reason);
+        done();
+        throw reason;
       }).then(resolve, reject);
     };
 
