@@ -10,7 +10,8 @@ get a promise that references that task.
 
 ## How to use
 
-`Queue.pushTask(function(resolve, reject) { ... })` Returns a Promise.
+`Queue.pushTask(function(resolve, reject) { ... })` Puts a task at the end of the queue. Returns a Promise.
+`Queue.unshiftTask(function(resolve, reject) { ... })` Puts a task at the beginning of the queue. Returns a Promise.
 
 `simple-promise-queue` inherits from [queue](https://github.com/jessetane/queue), so check that out for other methods.
 
@@ -37,7 +38,7 @@ var queue = new Queue({
 var promise = queue.pushTask(function(resolve, reject) {
   // do some task here to fetch results
   resolve('results');
-})
+});
 
 promise.then(function(results) {
   // process the results here
@@ -123,3 +124,6 @@ Promise.all([job2Part1, job2Part2]).then(function(values) {
   // this should take 8 seconds to reach here
 });
 ```
+
+## Testing
+1. Run the command inside this folder `./node_modules/mocha/bin/mocha`

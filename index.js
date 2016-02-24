@@ -22,30 +22,34 @@ QueuePromise.setPromise = function(CustomPromise) {
 // Just inherit everything form https://www.npmjs.com/package/queue
 var Queue = function(options) {
   var self = this;
-  self.Promise = Promise;
 
   SuperQueue.apply(self, arguments);
 
   if (typeof options !== 'undefined') {
     if (options.autoStart === true) {
-      var oldPush = self.push;
-      self.push = function() {
-        if (oldPush.apply(self, arguments) > 0) {
-          self.start();
-        }
-      };
+      ['push', 'unshift'].forEach(function(method) {
+        var old = self[method];
+        self[method] = function() {
+          old.apply(self, arguments);
+          if (self.jobs.length && self.running === false) {
+            self.start();
+          }
+        };
+      });
     }
 
-    if (options.Promise !== 'undefined') {
-      self.Promise = options.Promise;
-    }
+    self.on('end', function() {
+      if (self.jobs.length && self.running === false) {
+        self.start();
+      }
+    });
   }
 };
 
 util.inherits(Queue, SuperQueue);
 
-Queue.prototype.pushTask = function(promiseFunction) {
-  var self = this;
+// helper functions
+var insertQueue = function insertQueue(queue, method, promiseFunction) {
   // this promise will not be resolved till the delayed
   // promise is resolved/rejected
   return new QueuePromise(function(resolve, reject) {
@@ -60,8 +64,17 @@ Queue.prototype.pushTask = function(promiseFunction) {
       }).then(resolve, reject);
     };
 
-    self.push(wrapperFunction);
+    queue[method](wrapperFunction);
   });
+};
+
+// Public methods below
+Queue.prototype.pushTask = function pushTask(promiseFunction) {
+  return insertQueue(this, 'push', promiseFunction);
+};
+
+Queue.prototype.unshiftTask = function pushTask(promiseFunction) {
+  return insertQueue(this, 'unshift', promiseFunction);
 };
 
 module.exports = Queue;
