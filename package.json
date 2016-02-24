@@ -1,10 +1,10 @@
 {
   "name": "simple-promise-queue",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "queue where you can push promise-like functions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,12 @@
   "homepage": "https://github.com/digitaltsai/simple-promise-queue#readme",
   "dependencies": {
     "queue": "^3.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.0",
+    "chai": "^3.5.0",
+    "eslint": "^2.2.0",
+    "eslint-config-airbnb": "^6.0.1",
+    "eslint-plugin-require-path-exists": "^1.1.5"
   }
 }
