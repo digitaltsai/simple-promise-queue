@@ -11,6 +11,7 @@ get a promise that references that task.
 ## How to use
 
 `Queue.pushTask(function(resolve, reject) { ... })` Puts a task at the end of the queue. Returns a Promise.
+
 `Queue.unshiftTask(function(resolve, reject) { ... })` Puts a task at the beginning of the queue. Returns a Promise.
 
 `simple-promise-queue` inherits from [queue](https://github.com/jessetane/queue), so check that out for other methods.
