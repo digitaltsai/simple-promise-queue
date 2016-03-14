@@ -15,10 +15,6 @@ if (typeof Promise !== 'undefined') {
   };
 }
 
-QueuePromise.setPromise = function(CustomPromise) {
-  QueuePromise = CustomPromise;
-};
-
 // Just inherit everything form https://www.npmjs.com/package/queue
 var Queue = function(options) {
   var self = this;
@@ -75,6 +71,10 @@ Queue.prototype.pushTask = function pushTask(promiseFunction) {
 
 Queue.prototype.unshiftTask = function pushTask(promiseFunction) {
   return insertQueue(this, 'unshift', promiseFunction);
+};
+
+Queue.setPromise = function(CustomPromise) {
+  QueuePromise = CustomPromise;
 };
 
 module.exports = Queue;
