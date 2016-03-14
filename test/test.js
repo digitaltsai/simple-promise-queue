@@ -89,6 +89,28 @@ describe('Promise Queue', function() {
     });
   });
 
+  describe('setPromise', function() {
+    var queue;
+    var oldPromise = Promise;
+
+    afterEach(function() {
+      Queue.setPromise(oldPromise);
+    });
+
+    it('should be able to set a custom promise', function(done) {
+      Queue.setPromise(require('bluebird'));
+      queue = new Queue({
+        autoStart: true
+      });
+
+      queue.pushTask(function(resolve) {
+        resolve(true);
+      }).finally(function() {
+        done();
+      });
+    });
+  });
+
   describe('#methods', function() {
     var queue;
 
