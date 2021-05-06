@@ -54,7 +54,7 @@ var Queue = require('simple-promise-queue');
 
 var queue = new Queue({
   autoStart: true, // autostart the queue
-  concurrency: 5
+  concurrency: 5,
 });
 
 var promiseArr = [];
@@ -68,9 +68,8 @@ var updateUserInDb = function(id) {
   promiseArr.push(promise);
 };
 
-var promiseArr = [];
 for (var id = 0; id < 100; id++) {
-  queue.updateUserInDb(id);
+  updateUserInDb(id);
 }
 
 Promise.all(promiseArr).then(function() {
